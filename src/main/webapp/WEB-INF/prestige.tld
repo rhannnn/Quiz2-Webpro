@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="https://jakarta.ee/xml/ns/jakartaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd"
+        version="3.0">
+    <tlib-version>1.0</tlib-version>
+    <short-name>p</short-name>
+    <uri>https://prestige.local/functions</uri>
+    <function>
+        <name>h</name>
+        <function-class>com.prestige.util.Fmt</function-class>
+        <function-signature>java.lang.String h(java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <name>js</name>
+        <function-class>com.prestige.util.Fmt</function-class>
+        <function-signature>java.lang.String js(java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <name>idr</name>
+        <function-class>com.prestige.util.Fmt</function-class>
+        <function-signature>java.lang.String idr(java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <name>date</name>
+        <function-class>com.prestige.util.Fmt</function-class>
+        <function-signature>java.lang.String date(java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <name>repeat</name>
+        <function-class>com.prestige.util.Fmt</function-class>
+        <function-signature>java.lang.String repeat(java.lang.String, int)</function-signature>
+    </function>
+    <function>
+        <name>today</name>
+        <function-class>com.prestige.util.Fmt</function-class>
+        <function-signature>java.lang.String today()</function-signature>
+    </function>
+    <function>
+        <name>year</name>
+        <function-class>com.prestige.util.Fmt</function-class>
+        <function-signature>int year()</function-signature>
+    </function>
+</taglib>
