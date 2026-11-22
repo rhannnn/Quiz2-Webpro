@@ -26,21 +26,34 @@ public final class AppConfig {
 
     public static String dbUrl() {
         String full = get("DB_URL", null);
+        if (full == null) {
+            full = get("MYSQL_URL", null);
+        }
         if (full != null) {
+            if (full.startsWith("mysql://")) {
+                full = "jdbc:" + full;
+            }
+            if (!full.contains("?")) {
+                full += "?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Jakarta&useSSL=false&allowPublicKeyRetrieval=true";
+            } else if (!full.contains("allowPublicKeyRetrieval")) {
+                full += "&allowPublicKeyRetrieval=true";
+            }
             return full;
         }
-        return "jdbc:mysql://" + get("DB_HOST", "localhost") + ":" + get("DB_PORT", "3306") + "/"
-                + get("DB_NAME", "luxury_rent_car_jsp")
+        String host = get("DB_HOST", get("MYSQLHOST", "localhost"));
+        String port = get("DB_PORT", get("MYSQLPORT", "3306"));
+        String name = get("DB_NAME", get("MYSQLDATABASE", get("MYSQL_DATABASE", "luxury_rent_car_jsp")));
+        return "jdbc:mysql://" + host + ":" + port + "/" + name
                 + "?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8"
                 + "&serverTimezone=Asia/Jakarta&useSSL=false&allowPublicKeyRetrieval=true";
     }
 
     public static String dbUser() {
-        return get("DB_USER", "root");
+        return get("DB_USER", get("MYSQLUSER", "root"));
     }
 
     public static String dbPassword() {
-        return get("DB_PASSWORD", "");
+        return get("DB_PASSWORD", get("MYSQLPASSWORD", get("MYSQL_ROOT_PASSWORD", "")));
     }
 
     public static int dbPoolSize() {
