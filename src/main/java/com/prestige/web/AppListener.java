@@ -15,13 +15,23 @@ public class AppListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         try {
-            Files.createDirectories(AppConfig.uploadDir().resolve("cars"));
-        } catch (IOException e) {
-            throw new IllegalStateException("Folder upload tidak bisa dibuat: " + AppConfig.uploadDir(), e);
+            try {
+                Files.createDirectories(AppConfig.uploadDir().resolve("cars"));
+            } catch (IOException e) {
+                throw new IllegalStateException("Folder upload tidak bisa dibuat: " + AppConfig.uploadDir(), e);
+            }
+            String dbUrl = AppConfig.dbUrl();
+            String safeDbUrl = dbUrl.replaceAll("://[^/@]*@", "://***:***@");
+            System.out.println("[prestige] Starting with DB: " + safeDbUrl);
+            Database.init();
+            SchemaInit.run();
+            SchemaInit.restoreSeedImages();
+            System.out.println("[prestige] Startup complete.");
+        } catch (Throwable t) {
+            System.err.println("[prestige] Startup failed:");
+            t.printStackTrace(System.err);
+            throw t instanceof RuntimeException re ? re : new RuntimeException(t);
         }
-        Database.init();
-        SchemaInit.run();
-        SchemaInit.restoreSeedImages();
     }
 
     @Override
