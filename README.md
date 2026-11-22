@@ -1,4 +1,4 @@
-# Surabaya Prestige Motors (versi JSP)
+# Quiz 2 Web programming
 
 Website Luxury Rent Car & Motorsport, dipindahkan dari Laravel ke **Java/Jakarta Server Pages**.
 
